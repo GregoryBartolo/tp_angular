@@ -12,12 +12,4 @@ export class AppComponent {
 
   constructor (private authService:AuthService, private router: Router) {}
 
-  login() {
-    if (!this.authService.loggedIn) {
-      this.authService.logIn();
-    } else {
-      this.authService.logout();
-      this.router.navigate(['/home']);
-    }
-  }
 }

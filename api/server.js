@@ -2,21 +2,16 @@ let express = require('express');
 let app = express();
 let bodyParser = require('body-parser');
 let assignment = require('./routes/assignments');
+var AuthController = require('./auth/AuthController');
 
 let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 //mongoose.set('debug', true);
 
-// remplacer toute cette chaine par l'URI de connexion à votre propre base dans le cloud s
+// remplacer toute cette chaine par l'URI de connexion à votre propre base dans le cloud
 const uri = 'mongodb+srv://bartolo:bartolo@cluster0.wnp1n.mongodb.net/assignments?retryWrites=true&w=majority';
 
-const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify:false
-};
-
-mongoose.connect(uri, options)
+mongoose.connect(uri)
   .then(() => {
     console.log("Connecté à la base MongoDB assignments dans le cloud !");
     console.log("at URI = " + uri);
@@ -38,6 +33,9 @@ app.use(function (req, res, next) {
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+// Pour le module de connexion/deconnexion des utilisateurs
+app.use('/api/auth', AuthController);
+
 let port = process.env.PORT || 8010;
 
 // les routes
@@ -50,7 +48,6 @@ app.route(prefix + '/assignments/:id')
   .get(assignment.getAssignment)
   .delete(assignment.deleteAssignment);
 
-
 app.route(prefix + '/assignments')
   .post(assignment.postAssignment)
   .put(assignment.updateAssignment);
@@ -60,5 +57,3 @@ app.listen(port, "0.0.0.0");
 console.log('Serveur démarré sur http://localhost:' + port);
 
 module.exports = app;
-
-

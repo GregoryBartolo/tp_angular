@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Assignment } from './assignment.model';
 import { AssignmentsService } from '../shared/assignments.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-assignments',
@@ -24,9 +25,12 @@ export class AssignmentsComponent implements OnInit {
   prevPage!: number;
   hasNextPage?: boolean;
   nextPage!: number;
- 
+
+  email!: string;
+  password!: string;
 
   constructor(private assignmentService:AssignmentsService,
+              private authService:AuthService,
               private router:Router) {}
 
   ngOnInit() {
@@ -78,5 +82,14 @@ export class AssignmentsComponent implements OnInit {
 
   pagePrecedente() {
     this.getAssignments(this.prevPage, this.limit);
+  }
+
+  login() {
+    this.authService.logIn(this.email, this.password)
+      .subscribe((response) => {
+        console.log("connexion réussie");
+        console.log(response);
+        this.router.navigate(["/home"], {replaceUrl:true});
+      });
   }
 }

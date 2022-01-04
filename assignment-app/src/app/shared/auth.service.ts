@@ -1,14 +1,26 @@
 import { PortalModule } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User } from '../assignments/user.model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  loggedIn = true;
+  private HttpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json' //application/x-www-form-urlencoded
+    })
+  };
 
-  logIn() {
-    this.loggedIn = true;
+  constructor(private http:HttpClient) { }
+
+  loggedIn = true;
+  url = "http://localhost:8010/api/auth";
+
+  logIn(email: string, password: string): Observable<any> {
+    return this.http.post(this.url + "/login", {email, password}, this.HttpOptions);
   }
 
   logout() {
@@ -25,5 +37,13 @@ export class AuthService {
     return isUserAdmin;
   }
 
-  constructor() { }
+  private handleError<T>(operation:any, result?: T) {
+    return (error:any) : Observable<T> => {
+      console.error(error);
+      console.log(operation + ' a échoué ' + error.message);
+
+      return of(result as T);
+    }
+  }
+
 }
