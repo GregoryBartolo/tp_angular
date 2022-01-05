@@ -16,14 +16,22 @@ export class AuthService {
 
   constructor(private http:HttpClient) { }
 
-  loggedIn = true;
+  loggedIn = false;
   url = "http://localhost:8010/api/auth";
 
   logIn(email: string, password: string): Observable<any> {
     return this.http.post(this.url + "/login", {email, password}, this.HttpOptions);
   }
 
-  logout() {
+  activeLogin() {
+    this.loggedIn = true;
+  }
+
+  logOut(): Observable<any> {
+    return this.http.get(this.url + "/logout");
+  }
+
+  activeLogout() {
     this.loggedIn = false;
   }
 

@@ -16,3 +16,9 @@
 .ajouterBtn {
   align-self: flex-end;
 }
+
+.connectedZone {
+  display: flex;
+  align-items: center;
+  white-space: pre;
+}

@@ -2,7 +2,7 @@
 
 
 <main class="container">
-  <div class="loginZone">
+  <div class="loginZone" *ngIf="!isConnected()">
     <form ngForm class="form">
       <mat-form-field field>
         <input  matInput
@@ -26,8 +26,17 @@
       >
         Se connecter
       </button>
-  </form>
+    </form>
   </div>
+  <div class="connectedZone" *ngIf="isConnected()">
+    <p>Connecté !   </p>
+    <button mat-raised-button color="primary"
+      (click)="logout()"
+    >
+      Déconnexion
+    </button>
+  </div>
+  
 
   <div class="ajouterBtn">
     <button

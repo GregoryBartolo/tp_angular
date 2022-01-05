@@ -4,6 +4,10 @@
     <input required matInput [(ngModel)]="nomDevoir" name="nom" placeholder="Nom du devoir">
   </mat-form-field>
 
+  <mat-form-field>
+    <input required matInput [(ngModel)]="nomEleve" name="auteur" placeholder="Nom & Prénom de l'élève">
+  </mat-form-field>
+
   <mat-form-field appearance="fill">
     <mat-label>Date de rendu</mat-label>
     <input required matInput [matDatepicker]="picker"
@@ -11,6 +15,29 @@
     >
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <div class="zoneChoixMatiere">
+    <mat-form-field appearance="fill">
+      <mat-label>Matière</mat-label>
+      <mat-select [(ngModel)]="matiereChoisi" name="matiere">
+        <mat-option *ngFor="let matiere of matieres" [value]="matiere">
+          {{matiere.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <img src="{{matiereChoisi.photoMatiere}}" alt="Base de données" class="imageMatiereEtProf" *ngIf="matiereChoisi">
+    <img src="{{matiereChoisi.photoProf}}" alt="Prof Base de données" class="imageMatiereEtProf" *ngIf="matiereChoisi">
+  </div>
+<!-- 
+  <mat-form-field>
+    <input matInput [(ngModel)]="note" name="nom" type="number" min="0" max="20" placeholder="Note sur 20">
+  </mat-form-field> -->
+
+  <mat-form-field appearance="fill">
+    <mat-label>Laissez une remarque</mat-label>
+    <textarea matInput [(ngModel)]="remarque"></textarea>
   </mat-form-field>
 
   <button mat-stroked-button color="primary">

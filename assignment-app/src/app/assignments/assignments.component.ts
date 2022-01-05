@@ -88,8 +88,27 @@ export class AssignmentsComponent implements OnInit {
     this.authService.logIn(this.email, this.password)
       .subscribe((response) => {
         console.log("connexion réussie");
-        console.log(response);
+        if (response.auth) {
+          this.authService.activeLogin();
+        }
         this.router.navigate(["/home"], {replaceUrl:true});
       });
   }
+
+  logout() {
+    this.authService.logOut()
+      .subscribe((response) => {
+        console.log("déconnexion réussie");
+        console.log(response);
+        if (!response.auth) {
+          this.authService.activeLogout();
+        }
+        this.router.navigate(["/home"], {replaceUrl:true});
+      });
+  }
+
+  isConnected():boolean {
+    return this.authService.loggedIn;
+  }
+
 }

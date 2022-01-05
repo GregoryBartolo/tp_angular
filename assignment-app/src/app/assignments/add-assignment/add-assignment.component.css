@@ -3,3 +3,12 @@
   flex-direction: column;
   margin:5px;
 }
+
+.zoneChoixMatiere {
+  display: flex;
+}
+
+.imageMatiereEtProf {
+  width: 200px;
+  padding-left: 2em;
+}
