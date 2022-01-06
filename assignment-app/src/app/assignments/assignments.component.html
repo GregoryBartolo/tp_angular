@@ -5,94 +5,71 @@
   <div class="loginZone" *ngIf="!isConnected()">
     <form ngForm class="form">
       <mat-form-field field>
-        <input  matInput
-                placeholder="Email"
-                [(ngModel)]="email"
-                name="email"
-        >
+        <input matInput placeholder="Email" [(ngModel)]="email" name="email">
       </mat-form-field>
-      
+
       <mat-form-field password>
-        <input  matInput
-                type="password"
-                placeholder= "Mot de passe"
-                [(ngModel)]="password"
-                name="password"
-        >
+        <input matInput type="password" placeholder="Mot de passe" [(ngModel)]="password" name="password">
       </mat-form-field>
-      
-      <button mat-raised-button color="primary"
-        (click)="login()"
-      >
+
+      <button mat-raised-button color="primary" (click)="login()">
         Se connecter
       </button>
     </form>
   </div>
   <div class="connectedZone" *ngIf="isConnected()">
-    <p>Connecté !   </p>
-    <button mat-raised-button color="primary"
-      (click)="logout()"
-    >
+    <p>Connecté ! </p>
+    <button mat-raised-button color="primary" (click)="logout()">
       Déconnexion
     </button>
   </div>
-  
+
 
   <div class="ajouterBtn">
-    <button
-      mat-flat-button color="accent"
-      (click) = "peuplerBD()"
-    >
+    <button mat-flat-button color="accent" (click)="peuplerBD()">
       Peupler BD
     </button>
 
     <a routerLink="/add">
-      <button
-        mat-flat-button color="accent"
-        (click)="onAddAssignmentBtnClick()"
-        class="ajouterBtn">
+      <button mat-flat-button color="accent" (click)="onAddAssignmentBtnClick()" class="ajouterBtn">
         Ajouter Assignment
       </button>
     </a>
   </div>
 
-  <button mat-button
-    (click)="pagePrecedente()"
-    [disabled]="!hasPrevPage"
-  >
+  <button mat-button (click)="pagePrecedente()" [disabled]="!hasPrevPage">
     Page précédente
   </button>
 
-  <button mat-button
-    (click)="pageSuivante()"
-    [disabled]="!hasNextPage"
-  >
+  <button mat-button (click)="pageSuivante()" [disabled]="!hasNextPage">
     Page suivante
   </button>
 
   <div class="matList">
     <mat-list *ngFor="let assignment of assignments">
       <nav><a class="textDecoration" routerLink="/assignment/{{assignment.id}}">
-        <mat-card class="assignment-card">
-          <img mat-card-sm-image class="photoMatiere" src="{{assignment.urlPhotoMatiere}}" >
+          <mat-card class="assignment-card">
+            <img mat-card-sm-image class="photoMatiere" src="{{assignment.urlPhotoMatiere}}">
 
-          <mat-card-title-group class="display-block">
-            <mat-card-title>{{assignment.nom}} - {{assignment.auteur}}</mat-card-title>
-            <mat-card-subtitle>{{assignment.dateDeRendu | date}}</mat-card-subtitle>
-            <mat-card-content *ngIf="assignment.remarque">{{ (assignment.remarque | slice:0:100)+'...' }}</mat-card-content>
-          </mat-card-title-group>
-          <mat-card-content class="renduEtPhotoProf">
-            <img class="photoProf" src="{{assignment.urlPhotoProf}}" >
-            <p *ngIf="assignment.rendu; else nonsoumis" appRendu>
-              Rendu : <mat-icon>done</mat-icon>
-            </p>
-            <ng-template #nonsoumis>
-              <p>Rendu : <mat-icon>close</mat-icon></p>
-            </ng-template>
-          </mat-card-content>
-        </mat-card>
+            <mat-card-title-group class="display-block">
+              <mat-card-title>{{assignment.nom}} - {{assignment.auteur}}</mat-card-title>
+              <mat-card-subtitle>{{assignment.dateDeRendu | date}}</mat-card-subtitle>
+              <mat-card-content *ngIf="assignment.remarque">{{ (assignment.remarque | slice:0:100)+'...' }}
+              </mat-card-content>
+            </mat-card-title-group>
+            <mat-card-content class="renduEtPhotoProf">
+              <img class="photoProf borderDouble" src="{{assignment.urlPhotoProf}}">
+              <p *ngIf="assignment.rendu; else nonsoumis" appRendu class="displayFlex">
+                Rendu : <mat-icon>done</mat-icon>
+              </p>
+              <ng-template #nonsoumis>
+                <p class="nonRendu displayFlex">Rendu : <mat-icon>close</mat-icon>
+                </p>
+              </ng-template>
+            </mat-card-content>
+          </mat-card>
 
-      </a></nav>
+        </a></nav>
     </mat-list>
   </div>
 

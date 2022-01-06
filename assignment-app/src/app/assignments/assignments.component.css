@@ -4,8 +4,6 @@
 
 .nonRendu {
   color:red;
-  background-color: yellow;
-  border: 2px dashed orange;
 }
 
 .container {
@@ -49,6 +47,7 @@
 .renduEtPhotoProf {
   display: flex;
   flex-direction: row-reverse;
+  font-size: large;
 }
 
 .textDecoration {
@@ -58,5 +57,12 @@
 .matList {
   margin-bottom: 5em;
   align-self: center;
+}
 
+.displayFlex {
+  display: flex;
+}
+
+.borderDouble {
+  border: double;
 }
