@@ -1,4 +1,4 @@
-<form ngForm #assignmentForm class="form"
+<form ngForm ngNativeValidate #assignmentForm class="form"
       (submit)="onSubmit($event);assignmentForm.reset();">
   <mat-form-field>
     <input required matInput [(ngModel)]="nomDevoir" name="nom" placeholder="Nom du devoir">
@@ -20,7 +20,7 @@
   <div class="zoneChoixMatiere">
     <mat-form-field appearance="fill">
       <mat-label>Matière</mat-label>
-      <mat-select [(ngModel)]="matiereChoisi" name="matiere">
+      <mat-select [(ngModel)]="matiereChoisi" name="selectMatiere" required>
         <mat-option *ngFor="let matiere of matieres" [value]="matiere">
           {{matiere.value}}
         </mat-option>
@@ -28,8 +28,10 @@
     </mat-form-field>
     
     <img src="{{matiereChoisi.photoMatiere}}" alt="Base de données" class="imageMatiereEtProf" *ngIf="matiereChoisi">
+    <p *ngIf="matiereChoisi">Cours dirigé par : </p>
     <img src="{{matiereChoisi.photoProf}}" alt="Prof Base de données" class="imageMatiereEtProf" *ngIf="matiereChoisi">
   </div>
+
 <!-- 
   <mat-form-field>
     <input matInput [(ngModel)]="note" name="nom" type="number" min="0" max="20" placeholder="Note sur 20">
@@ -40,7 +42,7 @@
     <textarea matInput [(ngModel)]="remarque"></textarea>
   </mat-form-field>
 
-  <button mat-stroked-button color="primary">
+  <button mat-stroked-button color="primary" [disabled]="!matiereChoisi">
     Ajouter un devoir
   </button>
 </form>

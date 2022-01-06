@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { RenduDirective } from './shared/rendu.directive';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -50,7 +50,7 @@ const routes : Routes = [
     FormsModule, MatFormFieldModule, MatInputModule, MatOptionModule,
     MatDatepickerModule, MatNativeDateModule,
     MatListModule, MatCardModule, MatCheckboxModule, MatSlideToggleModule,
-    FormsModule, HttpClientModule,
+    FormsModule, ReactiveFormsModule, HttpClientModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

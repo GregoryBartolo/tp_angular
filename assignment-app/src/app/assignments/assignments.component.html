@@ -1,5 +1,5 @@
 <!-- <app-add-assignment *ngIf="formVisible" (nouvelAssignment)="onNouvelAssignment($event)"></app-add-assignment> -->
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <main class="container">
   <div class="loginZone" *ngIf="!isConnected()">
@@ -70,20 +70,32 @@
     Page suivante
   </button>
 
-  <mat-list *ngFor="let assignment of assignments">
-    <nav><a routerLink="/assignment/{{assignment.id}}">
-      <h3 mat-subheader>{{assignment.dateDeRendu | date}}</h3>
-      <mat-list-item (click)="assignmentClique(assignment)">
-        <p *ngIf="assignment.rendu; else nonsoumis" appRendu>
-          {{assignment.nom}}, a été rendu par l'élève.
-          rendu : {{assignment.rendu}}</p>
-        <ng-template #nonsoumis>
-          {{assignment.nom}} pas encore rendu.
-        </ng-template>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-    </a></nav>
-  </mat-list>
+  <div class="matList">
+    <mat-list *ngFor="let assignment of assignments">
+      <nav><a class="textDecoration" routerLink="/assignment/{{assignment.id}}">
+        <mat-card class="assignment-card">
+          <img mat-card-sm-image class="photoMatiere" src="{{assignment.urlPhotoMatiere}}" >
+
+          <mat-card-title-group class="display-block">
+            <mat-card-title>{{assignment.nom}} - {{assignment.auteur}}</mat-card-title>
+            <mat-card-subtitle>{{assignment.dateDeRendu | date}}</mat-card-subtitle>
+            <mat-card-content *ngIf="assignment.remarque">{{ (assignment.remarque | slice:0:100)+'...' }}</mat-card-content>
+          </mat-card-title-group>
+          <mat-card-content class="renduEtPhotoProf">
+            <img class="photoProf" src="{{assignment.urlPhotoProf}}" >
+            <p *ngIf="assignment.rendu; else nonsoumis" appRendu>
+              Rendu : <mat-icon>done</mat-icon>
+            </p>
+            <ng-template #nonsoumis>
+              <p>Rendu : <mat-icon>close</mat-icon></p>
+            </ng-template>
+          </mat-card-content>
+        </mat-card>
+
+      </a></nav>
+    </mat-list>
+  </div>
+
 
   <!-- <app-assignment-detail [assignmentTransmis]="assignmentSelectionne"></app-assignment-detail> -->
 </main>

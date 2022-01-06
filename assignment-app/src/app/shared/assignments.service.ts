@@ -4,6 +4,7 @@ import { catchError, forkJoin, map, Observable, of, tap } from 'rxjs';
 import { Assignment } from '../assignments/assignment.model';
 import { LoggingService } from './logging.service';
 import { bdInitialAssignments } from './data';
+import { DatePipe, formatDate } from '@angular/common';
 
 @Injectable({
   //permet d'éviter de l'ajouter dans les modules..
@@ -38,7 +39,8 @@ export class AssignmentsService {
     },
   ];
 
-  constructor(private loggingService:LoggingService, private http:HttpClient) { }
+  constructor(private loggingService:LoggingService,
+              private http:HttpClient) { }
 
   url = "http://localhost:8010/api/assignments";
 
@@ -46,14 +48,11 @@ export class AssignmentsService {
     // const a:Assignment|undefined = this.assignments.find(elem => elem.id == id);
     // return of(a);
     return this.http.get<Assignment>(this.url + "/" + id)
-      .pipe(map(a => {
-        a.nom += " transformé avec un pipe...";
-        return a;
-      }),
-      tap(_ => {
-        console.log("tap: assignment avec id = " + id + " requête GET envoyée sur MongoDB cloud");
-      }),
-      catchError(this.handleError<Assignment>(`getAssignment(id=${id})`))
+      .pipe(
+        tap(_ => {
+          console.log("tap: assignment avec id = " + id + " requête GET envoyée sur MongoDB cloud");
+        }),
+        catchError(this.handleError<Assignment>(`getAssignment(id=${id})`))
     );
   }
 
@@ -104,8 +103,18 @@ export class AssignmentsService {
     bdInitialAssignments.forEach(a => {
       const nouvelAssignment = new Assignment();
       nouvelAssignment.nom = a.nom;
+      nouvelAssignment.auteur = a.auteur;
       nouvelAssignment.id = a.id;
       nouvelAssignment.dateDeRendu = new Date(a.dateDeRendu);
+      nouvelAssignment.matiere = a.matiere;
+      nouvelAssignment.urlPhotoMatiere = a.urlPhotoMatiere;
+      nouvelAssignment.urlPhotoProf = a.urlPhotoProf;
+      nouvelAssignment.note = a.note;
+      if (!a.remarque) {
+        nouvelAssignment.remarque = "";
+      } else {
+        nouvelAssignment.remarque = a.remarque;
+      }
       nouvelAssignment.rendu = a.rendu;
 
       appelsVersAddAssignment.push(this.addAssignment(nouvelAssignment));

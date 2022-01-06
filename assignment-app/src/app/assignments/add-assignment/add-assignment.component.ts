@@ -1,13 +1,15 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Assignment } from '../assignment.model';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon'
 
 interface Matiere {
   value: string;
   photoMatiere: string;
   photoProf: string;
 }
+
 
 @Component({
   selector: 'app-add-assignment',
@@ -21,10 +23,10 @@ export class AddAssignmentComponent implements OnInit {
   dateDeRendu?:Date;
   matieres: Matiere[] = [
     {value: 'Base de données', photoMatiere: '../assets/imgs/base-de-donnees.jpg', photoProf: '../assets/imgs/prof-bdd.jpg'},
-    // {value: 'Technologies Web'},
-    // {value: 'Grails'},
-    // {value: 'Android'},
-    // {value: 'Gestion de projet'},
+    {value: 'Technologies Web', photoMatiere: '../assets/imgs/web.jpg', photoProf: '../assets/imgs/prof-web.jpg'},
+    {value: 'Grails', photoMatiere: '../assets/imgs/grails.png', photoProf: '../assets/imgs/prof-grails.jpg'},
+    {value: 'Android', photoMatiere: '../assets/imgs/android.jpg', photoProf: '../assets/imgs/prof-android.jpg'},
+    {value: 'Gestion de projet', photoMatiere: '../assets/imgs/gestion-de-projet.jpg', photoProf: '../assets/imgs/prof-gestion-de-projet.jpg'},
   ];
   matiereChoisi?:Matiere;
   urlPhotoMatiere?:string;
@@ -57,5 +59,4 @@ export class AddAssignmentComponent implements OnInit {
 
     this.router.navigate(['/home']);
   }
-
 }

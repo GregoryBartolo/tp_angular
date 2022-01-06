@@ -6,6 +6,12 @@ let AssignmentSchema = Schema({
     id: Number,
     dateDeRendu: Date,
     nom: String,
+    auteur: String,
+    matiere: String,
+    urlPhotoMatiere: String,
+    urlPhotoProf: String,
+    remarque: String,
+    note: Number,
     rendu: Boolean
 });
 

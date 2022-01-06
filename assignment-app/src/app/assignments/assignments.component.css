@@ -13,6 +13,13 @@
   flex-direction: column;
 }
 
+.assignment-card {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  min-width: 33em;
+}
+
 .ajouterBtn {
   align-self: flex-end;
 }
@@ -21,4 +28,35 @@
   display: flex;
   align-items: center;
   white-space: pre;
+}
+
+.display-block {
+  display: block;
+  margin-right: 3em;
+  min-width: 15em;
+  max-width: 15em;
+}
+
+.photoProf {
+  width: 70px;
+  height: 70px;
+}
+
+.photoMatiere {
+  margin-right: 3em;
+}
+
+.renduEtPhotoProf {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.textDecoration {
+  text-decoration: unset;
+}
+
+.matList {
+  margin-bottom: 5em;
+  align-self: center;
+
 }
