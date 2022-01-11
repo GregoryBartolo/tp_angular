@@ -52,7 +52,7 @@
             <img mat-card-sm-image class="photoMatiere" src="{{assignment.urlPhotoMatiere}}">
 
             <mat-card-title-group class="display-block">
-              <mat-card-title>{{assignment.nom}} - {{assignment.auteur}}</mat-card-title>
+              <mat-card-title>{{assignment.nom}} - <i>{{assignment.auteur}}</i></mat-card-title>
               <mat-card-subtitle>{{assignment.dateDeRendu | date}}</mat-card-subtitle>
               <mat-card-content *ngIf="assignment.remarque">{{ (assignment.remarque | slice:0:100)+'...' }}
               </mat-card-content>

@@ -48,8 +48,8 @@ export class AddAssignmentComponent implements OnInit {
     newAssignment.dateDeRendu = this.dateDeRendu;
     newAssignment.rendu = false;
     newAssignment.matiere = this.matiereChoisi?.value;
-    newAssignment.urlPhotoMatiere = this.urlPhotoMatiere;
-    newAssignment.urlPhotoProf = this.urlPhotoProf;
+    newAssignment.urlPhotoMatiere = this.matiereChoisi?.photoMatiere;
+    newAssignment.urlPhotoProf = this.matiereChoisi?.photoProf;
     newAssignment.note = undefined;
 
     //this.assignments.push(newAssignment);

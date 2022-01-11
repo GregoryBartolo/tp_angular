@@ -82,6 +82,14 @@ function deleteAssignment(req, res) {
     })
 }
 
+// GET lastid for incrementation when add assignment
+function getLastId(req, res) {
+    Assignment.find().sort(new Document("id", -1)).limit(1).then(lastId => {
+        res.json(lastId);
+    })
+}
+
+
 
 
 module.exports = { getAssignments, postAssignment, getAssignment, updateAssignment, deleteAssignment };

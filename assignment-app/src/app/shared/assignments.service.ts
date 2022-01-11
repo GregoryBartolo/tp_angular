@@ -65,9 +65,14 @@ export class AssignmentsService {
     }
   }
 
-  getAssignments():Observable<Assignment[]> {
+  getAssignmentLastId():Observable<any> {
     // return of(this.assignments);
     return this.http.get<Assignment[]>(this.url);
+  }
+
+  getAssignments():Observable<Assignment[]> {
+    // return of(this.assignments);
+    return this.http.get<Assignment[]>(this.url + "");
   }
 
   getAssignmentsPagine(page:number, limit:number):Observable<any> {

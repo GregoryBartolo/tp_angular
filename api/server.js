@@ -44,6 +44,9 @@ const prefix = '/api';
 app.route(prefix + '/assignments')
   .get(assignment.getAssignments);
 
+// app.route(prefix + '/assignments/lastid')
+//   .get(assignment.);
+
 app.route(prefix + '/assignments/:id')
   .get(assignment.getAssignment)
   .delete(assignment.deleteAssignment);
