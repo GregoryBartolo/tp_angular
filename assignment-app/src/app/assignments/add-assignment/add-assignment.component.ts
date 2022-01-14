@@ -18,31 +18,31 @@ interface Matiere {
 })
 export class AddAssignmentComponent implements OnInit {
   // @Output() nouvelAssignment = new EventEmitter<Assignment>();
-  nomDevoir:string = ""; // champ du formulaire
-  nomEleve:string = "";
-  dateDeRendu?:Date;
+  nomDevoir: string = ""; // champ du formulaire
+  nomEleve: string = "";
+  dateDeRendu?: Date;
   matieres: Matiere[] = [
-    {value: 'Base de données', photoMatiere: '../assets/imgs/base-de-donnees.jpg', photoProf: '../assets/imgs/prof-bdd.jpg'},
-    {value: 'Technologies Web', photoMatiere: '../assets/imgs/web.jpg', photoProf: '../assets/imgs/prof-web.jpg'},
-    {value: 'Grails', photoMatiere: '../assets/imgs/grails.png', photoProf: '../assets/imgs/prof-grails.jpg'},
-    {value: 'Android', photoMatiere: '../assets/imgs/android.jpg', photoProf: '../assets/imgs/prof-android.jpg'},
-    {value: 'Gestion de projet', photoMatiere: '../assets/imgs/gestion-de-projet.jpg', photoProf: '../assets/imgs/prof-gestion-de-projet.jpg'},
+    { value: 'Base de données', photoMatiere: '../assets/imgs/base-de-donnees.jpg', photoProf: '../assets/imgs/prof-bdd.jpg' },
+    { value: 'Technologies Web', photoMatiere: '../assets/imgs/web.jpg', photoProf: '../assets/imgs/prof-web.jpg' },
+    { value: 'Grails', photoMatiere: '../assets/imgs/grails.png', photoProf: '../assets/imgs/prof-grails.jpg' },
+    { value: 'Android', photoMatiere: '../assets/imgs/android.jpg', photoProf: '../assets/imgs/prof-android.jpg' },
+    { value: 'Gestion de projet', photoMatiere: '../assets/imgs/gestion-de-projet.jpg', photoProf: '../assets/imgs/prof-gestion-de-projet.jpg' },
   ];
-  matiereChoisi?:Matiere;
-  urlPhotoMatiere?:string;
-  urlPhotoProf?:string;
-  note?:number;
-  remarque?:string;
+  matiereChoisi?: Matiere;
+  urlPhotoMatiere?: string;
+  urlPhotoProf?: string;
+  note?: number;
+  remarque?: string;
 
-  constructor(private assignmentsService:AssignmentsService,
-              private router:Router) { }
+  constructor(private assignmentsService: AssignmentsService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(event:Event) {
-    const newAssignment:Assignment = new Assignment();
-    newAssignment.id = Math.floor(Math.random()*1000);
+  onSubmit(event: Event) {
+    const newAssignment: Assignment = new Assignment();
+
     newAssignment.nom = this.nomDevoir;
     newAssignment.auteur = this.nomEleve;
     newAssignment.dateDeRendu = this.dateDeRendu;
@@ -52,11 +52,13 @@ export class AddAssignmentComponent implements OnInit {
     newAssignment.urlPhotoProf = this.matiereChoisi?.photoProf;
     newAssignment.note = undefined;
 
-    //this.assignments.push(newAssignment);
     // On envoie le nouvel assignment sous la forme d'un événement
-    this.assignmentsService.addAssignment(newAssignment)
-      .subscribe(message => console.log(message));
+    this.assignmentsService.getAssignmentLastId().subscribe(assignment => {
+      newAssignment.id = assignment.id + 1;
+      this.assignmentsService.addAssignment(newAssignment)
+        .subscribe(message => console.log(message));
 
-    this.router.navigate(['/home']);
+      this.router.navigate(['/home']);
+    });
   }
 }

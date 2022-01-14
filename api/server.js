@@ -16,7 +16,7 @@ mongoose.connect(uri)
     console.log("Connecté à la base MongoDB assignments dans le cloud !");
     console.log("at URI = " + uri);
     console.log("vérifiez with http://localhost:8010/api/assignments que cela fonctionne")
-    },
+  },
     err => {
       console.log('Erreur de connexion: ', err);
     });
@@ -30,7 +30,7 @@ app.use(function (req, res, next) {
 });
 
 // Pour les formulaires
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Pour le module de connexion/deconnexion des utilisateurs
@@ -44,8 +44,8 @@ const prefix = '/api';
 app.route(prefix + '/assignments')
   .get(assignment.getAssignments);
 
-// app.route(prefix + '/assignments/lastid')
-//   .get(assignment.);
+app.route(prefix + '/assignments/lastid')
+  .get(assignment.getLastId);
 
 app.route(prefix + '/assignments/:id')
   .get(assignment.getAssignment)
