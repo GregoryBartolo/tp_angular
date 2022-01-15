@@ -88,7 +88,7 @@ function getLastId(req, res) {
         if (err) {
             res.send(err);
         }
-        res.send(assignment.id);
+        res.send(assignment);
     });
 }
 
