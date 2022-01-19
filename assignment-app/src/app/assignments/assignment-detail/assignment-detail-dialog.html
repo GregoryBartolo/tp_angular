@@ -1,0 +1,11 @@
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Attribuer une note</mat-label>
+    <input matInput [(ngModel)]="note" name="nom" type="number" min="0" max="20" placeholder="Note sur 20">
+
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Annulez</button>
+  <button mat-button [mat-dialog-close]="note" cdkFocusInitial>Ok</button>
+</div>

@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { AssignmentDetailComponent } from './assignments/assignment-detail/assignment-detail.component';
+import { AssignmentDetailComponentDialog } from './assignments/assignment-detail/assignment-detail.component';
 import { MatListModule, MatSelectionList } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -25,6 +26,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
 import { AuthGuard } from './shared/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 const routes : Routes = [
   {path:'', component:AssignmentsComponent},
@@ -40,6 +42,7 @@ const routes : Routes = [
     AssignmentsComponent,
     RenduDirective,
     AssignmentDetailComponent,
+    AssignmentDetailComponentDialog,
     AddAssignmentComponent,
     EditAssignmentComponent
   ],
@@ -49,11 +52,16 @@ const routes : Routes = [
     MatButtonModule, MatIconModule, MatDividerModule, MatSelectModule,
     FormsModule, MatFormFieldModule, MatInputModule, MatOptionModule,
     MatDatepickerModule, MatNativeDateModule,
-    MatListModule, MatCardModule, MatCheckboxModule, MatSlideToggleModule,
+    MatListModule, MatCardModule, MatCheckboxModule, MatSlideToggleModule, MatDialogModule,
     FormsModule, ReactiveFormsModule, HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,3 +3,14 @@
     justify-content: space-between;
     align-items: flex-end;
 }
+
+.photoAssignmentDetail {
+    width: 4em;
+    float: right;
+    margin: 5px;
+}
+
+.nonRendu {
+    color: red;
+    display: flex;
+}

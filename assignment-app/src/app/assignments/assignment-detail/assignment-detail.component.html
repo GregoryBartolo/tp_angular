@@ -1,9 +1,31 @@
 <mat-card *ngIf="assignmentTransmis">
-  <mat-card-title>{{assignmentTransmis.nom}}</mat-card-title>
-  <mat-card-subtitle>{{assignmentTransmis.dateDeRendu | date}}</mat-card-subtitle>
+  <mat-card-title>{{assignmentTransmis.nom}} - Fait par <i>{{assignmentTransmis.auteur}}</i></mat-card-title>
+  <img src="{{assignmentTransmis.urlPhotoMatiere}}" class="photoAssignmentDetail" alt="Photo de la matiere">
+  <img src="{{assignmentTransmis.urlPhotoProf}}" class="photoAssignmentDetail" alt="Photo du prof">
+  <mat-card-subtitle>{{assignmentTransmis.dateDeRendu | date:'fullDate':'+0200':'fr'}}</mat-card-subtitle>
+
+  <p *ngIf="assignmentTransmis.remarque">{{assignmentTransmis.remarque}}</p>
+
+  <p *ngIf="assignmentTransmis.rendu; else nonsoumis" appRendu>
+    Rendu : <mat-icon>done</mat-icon>
+  </p>
+  <ng-template #nonsoumis>
+    <p class="nonRendu">Rendu : <mat-icon>close</mat-icon>
+    </p>
+  </ng-template>
+
+  <p>Matière : {{assignmentTransmis.matiere}}</p>
+  <p>Note :
+    <b>{{assignmentTransmis.note}}</b>
+    <b *ngIf="!assignmentTransmis.note">
+      Non attribué
+      <button mat-raised-button color="primary" *ngIf="isAdmin()" (click)="openDialog()">Notez !</button>
+    </b>
+  </p>
+
   <div id="bottom">
     <mat-checkbox
-      *ngIf='!assignmentTransmis.rendu'
+      *ngIf='!assignmentTransmis.rendu && assignmentTransmis.note && isAdmin()'
       (click)="onAssignmentRendu()">
       Devoir rendu
     </mat-checkbox>
@@ -14,11 +36,11 @@
       (click)="onClickEdit()"
       [disabled]="!isAdmin()"
     >
-      Edit
+      Modifier
     </button>
 
     <button mat-flat-button color="warn" (click)="onDelete()">
-      DELETE
+      Supprimer
     </button>
   </div>
 
