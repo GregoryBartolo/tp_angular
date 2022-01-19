@@ -17,7 +17,7 @@ export class AuthService {
   constructor(private http:HttpClient) { }
 
   loggedIn = false;
-  url = "http://localhost:8010/api/auth";
+  url = "https://tp-angular-buffa-api.herokuapp.com/api/auth";
 
   logIn(email: string, password: string): Observable<any> {
     return this.http.post(this.url + "/login", {email, password}, this.HttpOptions);

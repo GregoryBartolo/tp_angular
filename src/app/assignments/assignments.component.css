@@ -66,3 +66,16 @@
 .borderDouble {
   border: double;
 }
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
+
+.boutonsPages {
+  display: flex;
+  justify-content: center;
+}

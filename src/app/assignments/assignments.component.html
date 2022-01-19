@@ -37,41 +37,89 @@
     </a>
   </div>
 
-  <button mat-button (click)="pagePrecedente()" [disabled]="!hasPrevPage">
-    Page précédente
-  </button>
+  <div class="row">
+    <div class="column">
+      <div class="boutonsPages">
+        <button mat-button (click)="pagePrecedenteRendu()" [disabled]="!hasPrevPageRendu">
+          Page précédente
+        </button>
 
-  <button mat-button (click)="pageSuivante()" [disabled]="!hasNextPage">
-    Page suivante
-  </button>
+        <button mat-button (click)="pageSuivanteRendu()" [disabled]="!hasNextPageRendu">
+          Page suivante
+        </button>
+      </div>
 
-  <div class="matList">
-    <mat-list *ngFor="let assignment of assignments">
-      <nav><a class="textDecoration" routerLink="/assignment/{{assignment.id}}">
-          <mat-card class="assignment-card">
-            <img mat-card-sm-image class="photoMatiere" src="{{assignment.urlPhotoMatiere}}">
+      <div class="matList">
+        <mat-list *ngFor="let assignment of assignmentsRendus">
+          <nav><a class="textDecoration" routerLink="/assignment/{{assignment.id}}">
+              <mat-card class="assignment-card">
+                <img mat-card-sm-image class="photoMatiere" src="{{assignment.urlPhotoMatiere}}">
 
-            <mat-card-title-group class="display-block">
-              <mat-card-title>{{assignment.nom}} - <i>{{assignment.auteur}}</i></mat-card-title>
-              <mat-card-subtitle>{{assignment.dateDeRendu | date:'fullDate':'+0200':'fr'}}</mat-card-subtitle>
-              <mat-card-content *ngIf="assignment.remarque">{{ (assignment.remarque | slice:0:100)+'...' }}
-              </mat-card-content>
-            </mat-card-title-group>
-            <mat-card-content class="renduEtPhotoProf">
-              <img class="photoProf borderDouble" src="{{assignment.urlPhotoProf}}">
-              <p *ngIf="assignment.rendu; else nonsoumis" appRendu class="displayFlex">
-                Rendu : <mat-icon>done</mat-icon>
-              </p>
-              <ng-template #nonsoumis>
-                <p class="nonRendu displayFlex">Rendu : <mat-icon>close</mat-icon>
-                </p>
-              </ng-template>
-            </mat-card-content>
-          </mat-card>
+                <mat-card-title-group class="display-block">
+                  <mat-card-title>{{assignment.nom}} - <i>{{assignment.auteur}}</i></mat-card-title>
+                  <mat-card-subtitle>{{assignment.dateDeRendu | date:'fullDate':'+0200':'fr'}}</mat-card-subtitle>
+                  <mat-card-content *ngIf="assignment.remarque">{{ (assignment.remarque | slice:0:100)+'...' }}
+                  </mat-card-content>
+                </mat-card-title-group>
+                <mat-card-content class="renduEtPhotoProf">
+                  <img class="photoProf borderDouble" src="{{assignment.urlPhotoProf}}">
+                  <p *ngIf="assignment.rendu; else nonsoumis" appRendu class="displayFlex">
+                    Rendu : <mat-icon>done</mat-icon>
+                  </p>
+                  <ng-template #nonsoumis>
+                    <p class="nonRendu displayFlex">Rendu : <mat-icon>close</mat-icon>
+                    </p>
+                  </ng-template>
+                </mat-card-content>
+              </mat-card>
 
-        </a></nav>
-    </mat-list>
+            </a></nav>
+        </mat-list>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="boutonsPages">
+        <button mat-button (click)="pagePrecedenteNonRendu()" [disabled]="!hasPrevPageNonRendu">
+          Page précédente
+        </button>
+
+        <button mat-button (click)="pageSuivanteNonRendu()" [disabled]="!hasNextPageNonRendu">
+          Page suivante
+        </button>
+      </div>
+
+      <div class="matList">
+        <mat-list *ngFor="let assignment of assignmentsNonRendus">
+          <nav><a class="textDecoration" routerLink="/assignment/{{assignment.id}}">
+              <mat-card class="assignment-card">
+                <img mat-card-sm-image class="photoMatiere" src="{{assignment.urlPhotoMatiere}}">
+
+                <mat-card-title-group class="display-block">
+                  <mat-card-title>{{assignment.nom}} - <i>{{assignment.auteur}}</i></mat-card-title>
+                  <mat-card-subtitle>{{assignment.dateDeRendu | date:'fullDate':'+0200':'fr'}}</mat-card-subtitle>
+                  <mat-card-content *ngIf="assignment.remarque">{{ (assignment.remarque | slice:0:100)+'...' }}
+                  </mat-card-content>
+                </mat-card-title-group>
+                <mat-card-content class="renduEtPhotoProf">
+                  <img class="photoProf borderDouble" src="{{assignment.urlPhotoProf}}">
+                  <p *ngIf="assignment.rendu; else nonsoumis" appRendu class="displayFlex">
+                    Rendu : <mat-icon>done</mat-icon>
+                  </p>
+                  <ng-template #nonsoumis>
+                    <p class="nonRendu displayFlex">Rendu : <mat-icon>close</mat-icon>
+                    </p>
+                  </ng-template>
+                </mat-card-content>
+              </mat-card>
+
+            </a></nav>
+        </mat-list>
+      </div>
+    </div>
   </div>
+
+ 
 
 
   <!-- <app-assignment-detail [assignmentTransmis]="assignmentSelectionne"></app-assignment-detail> -->

@@ -18,16 +18,22 @@ export class AssignmentsComponent implements OnInit {
 
   assignmentSelectionne?: Assignment;
   formVisible = false;
-  assignments?: Assignment[];
+  assignmentsRendus?: Assignment[];
+  assignmentsNonRendus?: Assignment[];
 
-  page: number = 1;
+  pageRendu: number = 1;
+  pageNonRendu: number = 1;
   limit: number = 10;
   totalDocs?: number;
   totalPages?: number;
-  hasPrevPage?: boolean;
-  prevPage!: number;
-  hasNextPage?: boolean;
-  nextPage!: number;
+  hasPrevPageRendu?: boolean;
+  hasPrevPageNonRendu?: boolean;
+  prevPageRendu!: number;
+  prevPageNonRendu!: number;
+  hasNextPageRendu?: boolean;
+  hasNextPageNonRendu?: boolean;
+  nextPageRendu!: number;
+  nextPageNonRendu!: number;
 
   email!: string;
   password!: string;
@@ -37,22 +43,40 @@ export class AssignmentsComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.getAssignments(this.page, this.limit);
+    this.getAssignmentsRendu(this.pageRendu, this.limit);
+    this.getAssignmentsNonRendu(this.pageNonRendu, this.limit);
   }
 
-  getAssignments(page: number, limit: number) {
+  getAssignmentsRendu(pageRendu: number, limit: number) {
     this.assignmentService
-      .getAssignmentsPagine(page, limit)
+      .getAssignmentsPagineRendu(pageRendu, limit)
       .subscribe(data => {
-        this.assignments = data.docs;
-        this.page = data.page;
+        this.assignmentsRendus = data.docs;
+        this.pageRendu = data.page;
         this.limit = data.limit;
         this.totalDocs = data.totalDocs;
         this.totalPages = data.totalPages;
-        this.hasPrevPage = data.hasPrevPage;
-        this.prevPage = data.prevPage;
-        this.hasNextPage = data.hasNextPage;
-        this.nextPage = data.nextPage;
+        this.hasPrevPageRendu = data.hasPrevPage;
+        this.prevPageRendu = data.prevPage;
+        this.hasNextPageRendu = data.hasNextPage;
+        this.nextPageRendu = data.nextPage;
+        console.log("données reçues");
+      });
+  }
+
+  getAssignmentsNonRendu(pageNonRendu: number, limit: number) {
+    this.assignmentService
+      .getAssignmentsPagineNonRendu(pageNonRendu, limit)
+      .subscribe(data => {
+        this.assignmentsNonRendus = data.docs;
+        this.pageNonRendu = data.page;
+        this.limit = data.limit;
+        this.totalDocs = data.totalDocs;
+        this.totalPages = data.totalPages;
+        this.hasPrevPageNonRendu = data.hasPrevPage;
+        this.prevPageNonRendu = data.prevPage;
+        this.hasNextPageNonRendu = data.hasNextPage;
+        this.nextPageNonRendu = data.nextPage;
         console.log("données reçues");
       });
   }
@@ -74,12 +98,20 @@ export class AssignmentsComponent implements OnInit {
       })
   }
 
-  pageSuivante() {
-    this.getAssignments(this.nextPage, this.limit);
+  pageSuivanteRendu() {
+    this.getAssignmentsRendu(this.nextPageRendu, this.limit);
   }
 
-  pagePrecedente() {
-    this.getAssignments(this.prevPage, this.limit);
+  pagePrecedenteRendu() {
+    this.getAssignmentsRendu(this.prevPageRendu, this.limit);
+  }
+
+  pageSuivanteNonRendu() {
+    this.getAssignmentsNonRendu(this.nextPageRendu, this.limit);
+  }
+
+  pagePrecedenteNonRendu() {
+    this.getAssignmentsNonRendu(this.prevPageRendu, this.limit);
   }
 
   login() {

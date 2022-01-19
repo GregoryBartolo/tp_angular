@@ -42,8 +42,8 @@ export class AssignmentsService {
   constructor(private loggingService: LoggingService,
     private http: HttpClient) { }
 
-  // url = "http://localhost:8010/api/assignments";
-  url = "https://tp-angular-buffa-api.herokuapp.com/api/assignments";
+  url = "http://localhost:8010/api/assignments";
+  // url = "https://tp-angular-buffa-api.herokuapp.com/api/assignments";
 
   getAssignment(id: number): Observable<Assignment | undefined> {
     // const a:Assignment|undefined = this.assignments.find(elem => elem.id == id);
@@ -76,9 +76,14 @@ export class AssignmentsService {
     return this.http.get<Assignment[]>(this.url + "");
   }
 
-  getAssignmentsPagine(page: number, limit: number): Observable<any> {
+  getAssignmentsPagineRendu(page: number, limit: number): Observable<any> {
     // return of(this.assignments);
-    return this.http.get<Assignment[]>(this.url + "?page=" + page + "&limit=" + limit);
+    return this.http.get<Assignment[]>(this.url + "/rendus?page=" + page + "&limit=" + limit);
+  }
+
+  getAssignmentsPagineNonRendu(page: number, limit: number): Observable<any> {
+    // return of(this.assignments);
+    return this.http.get<Assignment[]>(this.url + "/nonrendus?page=" + page + "&limit=" + limit);
   }
 
   addAssignment(assignment: Assignment): Observable<any> {
