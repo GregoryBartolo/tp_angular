@@ -107,11 +107,11 @@ export class AssignmentsComponent implements OnInit {
   }
 
   pageSuivanteNonRendu() {
-    this.getAssignmentsNonRendu(this.nextPageRendu, this.limit);
+    this.getAssignmentsNonRendu(this.nextPageNonRendu, this.limit);
   }
 
   pagePrecedenteNonRendu() {
-    this.getAssignmentsNonRendu(this.prevPageRendu, this.limit);
+    this.getAssignmentsNonRendu(this.prevPageNonRendu, this.limit);
   }
 
   login() {
