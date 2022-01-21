@@ -51,6 +51,7 @@ export class AddAssignmentComponent implements OnInit {
     newAssignment.urlPhotoMatiere = this.matiereChoisi?.photoMatiere;
     newAssignment.urlPhotoProf = this.matiereChoisi?.photoProf;
     newAssignment.note = undefined;
+    newAssignment.remarque = this.remarque;
 
     // On envoie le nouvel assignment sous la forme d'un événement
     this.assignmentsService.getAssignmentLastId().subscribe(assignment => {
