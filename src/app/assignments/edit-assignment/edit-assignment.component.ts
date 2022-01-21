@@ -63,7 +63,7 @@ export class EditAssignmentComponent implements OnInit {
       this.assignment.dateDeRendu = this.dateDeRendu;
     }
 
-    if(this.note) {
+    if(this.note || this.note == 0) {
       this.assignment.note = this.note;
     };
 

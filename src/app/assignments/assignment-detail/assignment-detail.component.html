@@ -25,7 +25,7 @@
 
   <div id="bottom">
     <mat-checkbox
-      *ngIf='!assignmentTransmis.rendu && assignmentTransmis.note && isAdmin()'
+      *ngIf='!assignmentTransmis.rendu && (assignmentTransmis.note || assignmentTransmis.note == 0) && isAdmin()'
       (click)="onAssignmentRendu()">
       Devoir rendu
     </mat-checkbox>
