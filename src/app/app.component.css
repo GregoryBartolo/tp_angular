@@ -33,3 +33,9 @@ section {
   justify-content: center;
   width: 120px;
 }
+
+a {
+  color: initial;
+  display: block;
+  text-align-last: center;
+}

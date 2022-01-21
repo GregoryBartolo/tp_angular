@@ -19,7 +19,7 @@
 }
 
 .ajouterBtn {
-  align-self: flex-end;
+  align-self: center;
 }
 
 .connectedZone {
@@ -88,4 +88,9 @@
 
 .loginButtons {
   padding: 10px;
+}
+
+.buttonBar {
+  display: flex;
+  justify-content: space-around;
 }

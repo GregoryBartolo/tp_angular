@@ -2,39 +2,40 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <main class="container">
-  <div class="loginZone" *ngIf="!isConnected()">
-    <form ngForm class="form">
-      <mat-form-field field class="loginButtons">
-        <input matInput placeholder="Email" [(ngModel)]="email" name="email">
-      </mat-form-field>
+  <div class="buttonBar">
+    <div class="loginZone" *ngIf="!isConnected()">
+      <form ngForm class="form">
+        <mat-form-field field class="loginButtons">
+          <input matInput placeholder="Email" [(ngModel)]="email" name="email">
+        </mat-form-field>
 
-      <mat-form-field password class="loginButtons">
-        <input matInput type="password" placeholder="Mot de passe" [(ngModel)]="password" name="password">
-      </mat-form-field>
+        <mat-form-field password class="loginButtons">
+          <input matInput type="password" placeholder="Mot de passe" [(ngModel)]="password" name="password">
+        </mat-form-field>
 
-      <button mat-raised-button color="primary" (click)="login()">
-        Se connecter
+        <button mat-raised-button color="primary" (click)="login()">
+          Se connecter
+        </button>
+      </form>
+    </div>
+    <div class="connectedZone" *ngIf="isConnected()">
+      <p>Connecté ! </p>
+      <button mat-raised-button color="primary" (click)="logout()">
+        Déconnexion
       </button>
-    </form>
-  </div>
-  <div class="connectedZone" *ngIf="isConnected()">
-    <p>Connecté ! </p>
-    <button mat-raised-button color="primary" (click)="logout()">
-      Déconnexion
-    </button>
-  </div>
+    </div>
 
+    <div class="ajouterBtn">
+      <a routerLink="/add">
+        <button mat-flat-button color="accent" (click)="onAddAssignmentBtnClick()" class="ajouterBtn">
+          Ajouter un devoir
+        </button>
+      </a>
 
-  <div class="ajouterBtn">
-    <a routerLink="/add">
-      <button mat-flat-button color="accent" (click)="onAddAssignmentBtnClick()" class="ajouterBtn">
-        Ajouter un devoir
+      <button class="addDataButton" mat-flat-button color="accent" (click)="peuplerBD()">
+        Ajouter de la data
       </button>
-    </a>
-
-    <button class="addDataButton" mat-flat-button color="accent" (click)="peuplerBD()">
-      Ajouter de la data
-    </button>
+    </div>
   </div>
 
   <div class="row">
