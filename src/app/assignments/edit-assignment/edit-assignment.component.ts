@@ -11,7 +11,10 @@ import { Assignment } from '../assignment.model';
 export class EditAssignmentComponent implements OnInit {
   assignment: Assignment|undefined;
   nomAssignment?:string;
+  nomAuteur?:string;
   dateDeRendu?:Date;
+  note?:number;
+  remarque?:string;
 
   constructor(private assignmentsService: AssignmentsService,
               private route: ActivatedRoute,
@@ -51,10 +54,19 @@ export class EditAssignmentComponent implements OnInit {
     if(this.nomAssignment) {
       this.assignment.nom = this.nomAssignment;
     };
+
+    if(this.nomAuteur) {
+      this.assignment.auteur = this.nomAuteur;
+    };
  
     if(this.dateDeRendu) {
       this.assignment.dateDeRendu = this.dateDeRendu;
     }
+
+    if(this.note) {
+      this.assignment.note = this.note;
+    };
+
     this.assignmentsService.updateAssignment(this.assignment)
       .subscribe(message => {
         console.log(message);

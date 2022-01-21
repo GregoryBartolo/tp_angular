@@ -1,13 +1,20 @@
 <div class="container" *ngIf="assignment">
-    <h1>Edition de l'assignment {{assignment.nom}}</h1>
+    <h1>Edition de l'assignment : {{assignment.nom}}</h1>
     <form ngForm class="form">
         <mat-form-field field>
             <input  matInput
                     placeholder="Edition du nom"
                     [(ngModel)]="nomAssignment"
-                    name="assignment-name"
-            >
+                    name="assignment-name">
         </mat-form-field>
+
+        <mat-form-field field>
+            <input  matInput
+                    placeholder="Edition du nom et prénom de l'élève"
+                    [(ngModel)]="nomAuteur"
+                    name="assignment-auteur">
+        </mat-form-field>
+
         <mat-form-field>
             <input  matInput
                     [matDatepicker]="picker"
@@ -19,10 +26,13 @@
             </mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-        <button mat-raised-button color="primary"
-            (click)="onSaveAssignment()"
-        >
-        Sauver
+
+        <mat-form-field field>
+            <input matInput [(ngModel)]="note" name="nom" type="number" min="0" max="20" placeholder="Modifier la note">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="onSaveAssignment()">
+            Sauver
         </button>
     </form>
 </div>

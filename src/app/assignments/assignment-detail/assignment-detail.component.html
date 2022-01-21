@@ -17,7 +17,7 @@
   <p>Matière : {{assignmentTransmis.matiere}}</p>
   <p>Note :
     <b>{{assignmentTransmis.note}}</b>
-    <b *ngIf="!assignmentTransmis.note">
+    <b *ngIf="!assignmentTransmis.note && assignmentTransmis.note != 0">
       Non attribué
       <button mat-raised-button color="primary" *ngIf="isAdmin()" (click)="openDialog()">Notez !</button>
     </b>
