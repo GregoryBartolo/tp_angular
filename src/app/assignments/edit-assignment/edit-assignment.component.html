@@ -31,6 +31,10 @@
             <input matInput [(ngModel)]="note" name="nom" type="number" min="0" max="20" placeholder="Modifier la note">
         </mat-form-field>
 
+        <mat-form-field field>
+            <textarea matInput placeholder="Laissez une remarque" [(ngModel)]="remarque" name="remarque"></textarea>
+        </mat-form-field>
+
         <button mat-raised-button color="primary" (click)="onSaveAssignment()">
             Sauver
         </button>

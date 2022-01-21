@@ -67,6 +67,10 @@ export class EditAssignmentComponent implements OnInit {
       this.assignment.note = this.note;
     };
 
+    if(this.remarque) {
+      this.assignment.remarque = this.remarque;
+    }
+
     this.assignmentsService.updateAssignment(this.assignment)
       .subscribe(message => {
         console.log(message);
