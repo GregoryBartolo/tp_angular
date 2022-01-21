@@ -81,3 +81,11 @@
   display: flex;
   justify-content: center;
 }
+
+.addDataButton {
+  margin-left: 30px;
+}
+
+.loginButtons {
+  padding: 10px;
+}

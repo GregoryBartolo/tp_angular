@@ -4,11 +4,11 @@
 <main class="container">
   <div class="loginZone" *ngIf="!isConnected()">
     <form ngForm class="form">
-      <mat-form-field field>
+      <mat-form-field field class="loginButtons">
         <input matInput placeholder="Email" [(ngModel)]="email" name="email">
       </mat-form-field>
 
-      <mat-form-field password>
+      <mat-form-field password class="loginButtons">
         <input matInput type="password" placeholder="Mot de passe" [(ngModel)]="password" name="password">
       </mat-form-field>
 
@@ -26,15 +26,15 @@
 
 
   <div class="ajouterBtn">
-    <button mat-flat-button color="accent" (click)="peuplerBD()">
-      Peupler BD
-    </button>
-
     <a routerLink="/add">
       <button mat-flat-button color="accent" (click)="onAddAssignmentBtnClick()" class="ajouterBtn">
-        Ajouter Assignment
+        Ajouter un devoir
       </button>
     </a>
+
+    <button class="addDataButton" mat-flat-button color="accent" (click)="peuplerBD()">
+      Ajouter de la data
+    </button>
   </div>
 
   <div class="row">
