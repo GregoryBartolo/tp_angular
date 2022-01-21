@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { Assignment } from '../assignment.model';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon'
 
 interface Matiere {
@@ -10,13 +11,19 @@ interface Matiere {
   photoProf: string;
 }
 
-
 @Component({
   selector: 'app-add-assignment',
   templateUrl: './add-assignment.component.html',
   styleUrls: ['./add-assignment.component.css']
 })
 export class AddAssignmentComponent implements OnInit {
+  isLinear = true;
+  nomAssignmentFormGroup!: FormGroup;
+  nomAuteurFormGroup!: FormGroup;
+  dateDeRenduFormGroup!: FormGroup;
+  matiereFormGroup!: FormGroup;
+  remarqueFormGroup!: FormGroup;
+
   // @Output() nouvelAssignment = new EventEmitter<Assignment>();
   nomDevoir: string = ""; // champ du formulaire
   nomEleve: string = "";
@@ -35,9 +42,25 @@ export class AddAssignmentComponent implements OnInit {
   remarque?: string;
 
   constructor(private assignmentsService: AssignmentsService,
-    private router: Router) { }
+              private router: Router,
+              private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.nomAssignmentFormGroup = this._formBuilder.group({
+      nomDevoir: ['', Validators.required],
+    });
+    this.nomAuteurFormGroup = this._formBuilder.group({
+      nomAuteur: ['', Validators.required],
+    });
+    this.dateDeRenduFormGroup = this._formBuilder.group({
+      dateDeRendu: ['', Validators.required],
+    });
+    this.matiereFormGroup = this._formBuilder.group({
+      matiere: ['', Validators.required],
+    });
+    this.remarqueFormGroup = this._formBuilder.group({
+      remarque: [''],
+    });
   }
 
   onSubmit(event: Event) {
@@ -53,6 +76,8 @@ export class AddAssignmentComponent implements OnInit {
     newAssignment.note = undefined;
     newAssignment.remarque = this.remarque;
 
+    console.log(newAssignment);
+
     // On envoie le nouvel assignment sous la forme d'un événement
     this.assignmentsService.getAssignmentLastId().subscribe(assignment => {
       newAssignment.id = assignment.id + 1;
@@ -60,6 +85,6 @@ export class AddAssignmentComponent implements OnInit {
         .subscribe(message => console.log(message));
 
       this.router.navigate(['/home']);
-    });
+    });  
   }
 }

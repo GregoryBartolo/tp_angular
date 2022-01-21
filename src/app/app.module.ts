@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { AssignmentDetailComponent } from './assignments/assignment-detail/assignment-detail.component';
 import { AssignmentDetailComponentDialog } from './assignments/assignment-detail/assignment-detail.component';
@@ -51,6 +52,7 @@ const routes : Routes = [
     BrowserAnimationsModule,
     MatButtonModule, MatIconModule, MatDividerModule, MatSelectModule,
     FormsModule, MatFormFieldModule, MatInputModule, MatOptionModule,
+    MatStepperModule,
     MatDatepickerModule, MatNativeDateModule,
     MatListModule, MatCardModule, MatCheckboxModule, MatSlideToggleModule, MatDialogModule,
     FormsModule, ReactiveFormsModule, HttpClientModule,

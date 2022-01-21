@@ -15,3 +15,29 @@
   max-height: 150px;
   padding-left: 2em;
 }
+
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
+
+mat-stepper {
+  background-color: unset;
+}
+
+.affichageMatiereAvecSelect {
+  display: flex;
+}
+
+.affichageMatiere {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.coursDirige {
+  align-self: center;
+  font-size: large;
+}
