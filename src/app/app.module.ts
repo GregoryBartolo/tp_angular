@@ -28,11 +28,15 @@ import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assi
 import { AuthGuard } from './shared/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { UserCreationComponent } from './user-creation/user-creation.component';
+
 
 const routes : Routes = [
   {path:'', component:AssignmentsComponent},
   {path:'home', component:AssignmentsComponent},
   {path:'add', component:AddAssignmentComponent},
+  {path:'register', component:UserCreationComponent},
   {path:'assignment/:id', component:AssignmentDetailComponent},
   {path:'assignment/:id/edit', component:EditAssignmentComponent, canActivate: [AuthGuard]}
 ];
@@ -45,7 +49,8 @@ const routes : Routes = [
     AssignmentDetailComponent,
     AssignmentDetailComponentDialog,
     AddAssignmentComponent,
-    EditAssignmentComponent
+    EditAssignmentComponent,
+    UserCreationComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,7 @@ const routes : Routes = [
     MatStepperModule,
     MatDatepickerModule, MatNativeDateModule,
     MatListModule, MatCardModule, MatCheckboxModule, MatSlideToggleModule, MatDialogModule,
-    FormsModule, ReactiveFormsModule, HttpClientModule,
+    FormsModule, ReactiveFormsModule, HttpClientModule,DragDropModule,
     RouterModule.forRoot(routes)
   ],
   providers: [

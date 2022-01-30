@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+
+
+
 registerLocaleData(localeFr, 'fr');
 
 @Component({
@@ -139,6 +143,24 @@ export class AssignmentsComponent implements OnInit {
 
   isConnected(): boolean {
     return this.authService.loggedIn;
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+
+    if(this.assignmentsNonRendus !== undefined ){
+      this.assignmentsNonRendus[event.currentIndex].rendu = true;
+      this.assignmentService.updateAssignment(this.assignmentsNonRendus[event.currentIndex])
+      .subscribe(message => {
+        console.log(message);
+        this.router.navigate(["/home"]);
+      });
+
+      if(this.assignmentsRendus !== undefined ){
+        console.log(event)
+        this.assignmentsRendus.unshift(this.assignmentsNonRendus[event.currentIndex])
+        this.assignmentsNonRendus.splice(event.currentIndex,1)
+      }
+    }
   }
 
 }

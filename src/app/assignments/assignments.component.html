@@ -32,9 +32,15 @@
         </button>
       </a>
 
-      <button class="addDataButton" mat-flat-button color="accent" (click)="peuplerBD()">
+      <a routerLink="/register">
+        <button mat-flat-button color="accent" class="addDataButton">
+          Créer un compte
+        </button>
+      </a>
+
+      <!-- <button class="addDataButton" mat-flat-button color="accent" (click)="peuplerBD()">
         Ajouter de la data
-      </button>
+      </button> -->
     </div>
   </div>
 
@@ -50,8 +56,11 @@
         </button>
       </div>
 
-      <div class="matList">
-        <mat-list *ngFor="let assignment of assignmentsRendus">
+      <div class="matList" 
+      cdkDropList 
+      #renduList="cdkDropList"
+      (cdkDropListDropped)="drop($event)">
+        <mat-list *ngFor="let assignment of assignmentsRendus" cdkDrag >
           <nav><a class="textDecoration" routerLink="/assignment/{{assignment.id}}">
               <mat-card class="assignment-card">
                 <img mat-card-sm-image class="photoMatiere" src="{{assignment.urlPhotoMatiere}}">
@@ -91,8 +100,14 @@
       </div>
 
       <div class="matList">
-        <mat-list *ngFor="let assignment of assignmentsNonRendus">
-          <nav><a class="textDecoration" routerLink="/assignment/{{assignment.id}}">
+        <mat-list *ngFor="let assignment of assignmentsNonRendus" 
+        cdkDropList
+        [cdkDropListConnectedTo]="[renduList]"
+        (cdkDropListDropped)="drop($event)"
+        >
+
+          <nav cdkDrag [cdkDragDisabled]="!isConnected() || ( assignment.note === undefined )">
+            <a class="textDecoration" routerLink="/assignment/{{assignment.id}}">
               <mat-card class="assignment-card">
                 <img mat-card-sm-image class="photoMatiere" src="{{assignment.urlPhotoMatiere}}">
 
