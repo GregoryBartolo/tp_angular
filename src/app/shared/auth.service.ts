@@ -14,13 +14,14 @@ export class AuthService {
     })
   };
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   loggedIn = false;
+  // url = "http://localhost:8010/api/auth";
   url = "https://tp-angular-buffa-api.herokuapp.com/api/auth";
 
   logIn(email: string, password: string): Observable<any> {
-    return this.http.post(this.url + "/login", {email, password}, this.HttpOptions);
+    return this.http.post(this.url + "/login", { email, password }, this.HttpOptions);
   }
 
   activeLogin() {
@@ -46,11 +47,11 @@ export class AuthService {
   }
 
   registerIn(name: string, email: string, password: string): Observable<any> {
-    return this.http.post(this.url + "/register", {name, email, password}, this.HttpOptions);
+    return this.http.post(this.url + "/register", { name, email, password }, this.HttpOptions);
   }
 
-  private handleError<T>(operation:any, result?: T) {
-    return (error:any) : Observable<T> => {
+  private handleError<T>(operation: any, result?: T) {
+    return (error: any): Observable<T> => {
       console.error(error);
       console.log(operation + ' a échoué ' + error.message);
 
