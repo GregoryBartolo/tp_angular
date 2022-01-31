@@ -45,6 +45,10 @@ export class AuthService {
     return isUserAdmin;
   }
 
+  registerIn(name: string, email: string, password: string): Observable<any> {
+    return this.http.post(this.url + "/register", {name, email, password}, this.HttpOptions);
+  }
+
   private handleError<T>(operation:any, result?: T) {
     return (error:any) : Observable<T> => {
       console.error(error);

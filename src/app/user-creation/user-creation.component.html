@@ -1,53 +1,42 @@
-<!-- Revoir la tronche car la c'est moche as fuck  -->
-
-
-
 <div class="box">
-    <form ngForm [formGroup]="userForm" (ngSubmit)="onSubmit()" class="border border-light p-5 form">
-        <div class="form-row mb-8">
-            <div class="col">   
-                <mat-form-field field appearance="fill">
-                    <mat-label>Name</mat-label>
-                    <input matInput type="text" formControlName="name" id="RegisterFormName" placeholder="name">
-                </mat-form-field>
-            </div>
-            
-            <div class="col">   
-                <mat-form-field field appearance="fill">
-                    <mat-label>Email</mat-label>
-                    <input matInput type="email" formControlName="email" id="RegisterFormEmail" placeholder="E-mail">
-                </mat-form-field>
-            </div>
-            
-            <div class="col">   
-                <mat-form-field field appearance="fill">
-                    <mat-label>Password</mat-label>
-                    <input matInput type="password" formControlName="password" id="RegisterFormPassword"  placeholder="password">
-                </mat-form-field>
-            </div>
-        </div>
-        <button mat-raised-button color="primary" type="submit">Register</button>
-      </form>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-row mb-8">
+      <div class="col">
+        <mat-form-field field appearance="fill">
+          <mat-label>Nom</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="name"
+            placeholder="Nom"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+            placeholder="Email"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field field appearance="fill">
+          <mat-label>Mot de passe</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            placeholder="Mot de passe"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" type="submit">Register</button>
+  </form>
 </div>
-
-
-
-
-<!-- 
-  <form ngForm class="form">
-    <mat-form-field field class="loginButtons">
-      <input matInput placeholder="Email"  formControlName="email" id="RegisterFormEmail">
-    </mat-form-field>
-
-    <mat-form-field password class="loginButtons">
-      <input matInput placeholder="Name" formControlName="name" id="RegisterFormtName">
-    </mat-form-field>
-
-    <mat-form-field password class="loginButtons">
-      <input matInput type="password" placeholder="Mot de passe" formControlName="password" id="RegisterFormPassword" >
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" (click)="onSubmit()">
-      Se connecter
-    </button>
-  </form> -->

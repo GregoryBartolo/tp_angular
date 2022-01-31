@@ -146,19 +146,20 @@ export class AssignmentsComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-
-    if(this.assignmentsNonRendus !== undefined ){
-      this.assignmentsNonRendus[event.currentIndex].rendu = true;
-      this.assignmentService.updateAssignment(this.assignmentsNonRendus[event.currentIndex])
-      .subscribe(message => {
-        console.log(message);
-        this.router.navigate(["/home"]);
-      });
-
-      if(this.assignmentsRendus !== undefined ){
-        console.log(event)
-        this.assignmentsRendus.unshift(this.assignmentsNonRendus[event.currentIndex])
-        this.assignmentsNonRendus.splice(event.currentIndex,1)
+    if (event.previousContainer != event.container) {
+      if(this.assignmentsNonRendus !== undefined ){
+        this.assignmentsNonRendus[event.currentIndex].rendu = true;
+        this.assignmentService.updateAssignment(this.assignmentsNonRendus[event.currentIndex])
+        .subscribe(message => {
+          console.log(message);
+          this.router.navigate(["/home"]);
+        });
+  
+        if(this.assignmentsRendus !== undefined ){
+          console.log(event)
+          this.assignmentsRendus.unshift(this.assignmentsNonRendus[event.currentIndex])
+          this.assignmentsNonRendus.splice(event.currentIndex,1)
+        }
       }
     }
   }

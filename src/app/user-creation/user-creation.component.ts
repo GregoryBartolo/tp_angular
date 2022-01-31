@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../shared/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,31 +12,36 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./user-creation.component.css']
 })
 export class UserCreationComponent implements OnInit {
-  userForm: any;
+  registerForm!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService,
+    private router: Router,
     ) { }
 
   ngOnInit(): void {
-    this.userForm = this.formBuilder.group({
+    this.registerForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  onSubmit(){
-    if(this.userForm.valid){
-      //voir avec greg pour faire l'appel API (normalement j'ai dfeja vue le register dans l'api)
-      this.http.post('/register', this.userForm.value)
-      .subscribe((response)=>{
-        console.log('repsonse ',response);
-      })
-    } else {
-      alert('User form is not valid!!')
-    }
+  get f() { return this.registerForm.controls; }
+
+  onSubmit() {
+
+        if (this.registerForm.invalid) {
+            return;
+        }
+
+        this.authService.registerIn(this.f['name'].value, this.f['email'].value, this.f['password'].value)
+        .subscribe((response) => {
+            console.log("inscription réussie");
+            this.router.navigate(["/home"], { replaceUrl: true });
+        });
   }
 
 }
